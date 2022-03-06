@@ -1,11 +1,11 @@
 <!-- start title -->
 
-# GitHub Action:Hello World
+# GitHub Action:Validate Helm Chart
 
 <!-- end title -->
 <!-- start description -->
 
-Greet someone
+Validates a helm chart using helm lint, and helm template commands. Optionally validates that the only branch merged into main is alpha
 
 <!-- end description -->
 <!-- start contents -->
@@ -13,19 +13,20 @@ Greet someone
 <!-- start usage -->
 
 ```yaml
-- uses: catalystsquad/action-composite-action-template@undefined
+- uses: catalystsquad/action-validate-helm-chart@undefined
   with:
-    # Who to greet
-    # Default: World
-    who-to-greet: ""
+    # When true, the action will fail if the pull request is into the `main` branch
+    # and the source branch is not `alpha`
+    # Default: true
+    validate-main-alpha-merge: ""
 ```
 
 <!-- end usage -->
 <!-- start inputs -->
 
-| **Input**          | **Description** | **Default** | **Required** |
-| :----------------- | :-------------- | :---------: | :----------: |
-| **`who-to-greet`** | Who to greet    |   `World`   |   **true**   |
+| **Input**                       | **Description**                                                                                                    | **Default** | **Required** |
+| :------------------------------ | :----------------------------------------------------------------------------------------------------------------- | :---------: | :----------: |
+| **`validate-main-alpha-merge`** | When true, the action will fail if the pull request is into the `main` branch and the source branch is not `alpha` |   `true`    |  **false**   |
 
 <!-- end inputs -->
 <!-- start outputs -->
@@ -47,7 +48,7 @@ on:
       - main
       - alpha
     paths:
-      - 'chart/**'
+      - "chart/**"
 jobs:
   validate-chart:
     if: ${{ !startsWith( github.head_ref, 'automated-code-release' ) }}
