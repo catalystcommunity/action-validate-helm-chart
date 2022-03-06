@@ -19,6 +19,14 @@ Validates a helm chart using helm lint, and helm template commands. Optionally v
     # and the source branch is not `alpha`
     # Default: true
     validate-main-alpha-merge: ""
+
+    # Args to pass to the lint command. i.e. `--set x=y`
+    # Default:
+    lint-args: ""
+
+    # Args to pass to the template command. i.e. `--set x=y`
+    # Default:
+    template-args: ""
 ```
 
 <!-- end usage -->
@@ -27,6 +35,8 @@ Validates a helm chart using helm lint, and helm template commands. Optionally v
 | **Input**                       | **Description**                                                                                                    | **Default** | **Required** |
 | :------------------------------ | :----------------------------------------------------------------------------------------------------------------- | :---------: | :----------: |
 | **`validate-main-alpha-merge`** | When true, the action will fail if the pull request is into the `main` branch and the source branch is not `alpha` |   `true`    |  **false**   |
+| **`lint-args`**                 | Args to pass to the lint command. i.e. `--set x=y`                                                                 |             |  **false**   |
+| **`template-args`**             | Args to pass to the template command. i.e. `--set x=y`                                                             |             |  **false**   |
 
 <!-- end inputs -->
 <!-- start outputs -->

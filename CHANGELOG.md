@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/catalystsquad/action-validate-helm-chart/compare/v1.0.0...v1.0.1) (2022-03-06)
+
+
+### Bug Fixes
+
+* Additional args ([#2](https://github.com/catalystsquad/action-validate-helm-chart/issues/2)) ([f749937](https://github.com/catalystsquad/action-validate-helm-chart/commit/f749937550d14bff6f740e4ecd063c9b4ac258e0))
+
 # 1.0.0 (2022-03-06)
 
 
