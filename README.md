@@ -40,20 +40,22 @@ Greet someone
 ### Example usage
 
 ```yaml
-on: [push]
-
+name: Validate Helm Chart PR
+on:
+  pull_request:
+    branches:
+      - main
+      - alpha
+    paths:
+      - 'chart/**'
 jobs:
-  hello_world_job:
+  validate-chart:
+    if: ${{ !startsWith( github.head_ref, 'automated-code-release' ) }}
+    name: Lint Chart
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-      - uses: actions/checkout@v2
-      - id: foo
-        uses: actions/hello-world-composite-action@v1
-        with:
-          who-to-greet: "Mona the Octocat"
-      - run: echo random-number ${{ steps.foo.outputs.random-number }}
-        shell: bash
+      - uses: crazy-max/ghaction-dump-context@v1
+      - uses: catalystsquad/action-validate-helm-chart@v1
 ```
 
 <!-- end examples -->
