@@ -5,6 +5,14 @@ inputs:
     description: 'When true, the action will fail if the pull request is into the `main` branch and the source branch is not `alpha`'
     required: false
     default: true
+  additional-template-args:
+    description: 'Additional args to pass to the template command. i.e. `--set x=y`'
+    required: false
+    default: ''
+  additional-lint-args:
+    description: 'Additional args to pass to the lint command. i.e. `--set x=y`'
+    required: false
+    default: ''
 outputs: {}
 runs:
   using: "composite"
@@ -19,8 +27,8 @@ runs:
       shell: bash
       run: |
         helm dependency update chart
-        helm lint chart
-        helm template chart
+        helm lint chart ${{ inputs.additional-lint-args }}
+        helm template chart ${{ inputs.additional-template-args }}
     - name: Validate branch
       if: inputs.validate-main-alpha-merge && github.base_ref == 'main' && github.head_ref != 'alpha'
       shell: bash
