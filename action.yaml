@@ -1,22 +1,29 @@
-name: 'Hello World' # taken from https://docs.github.com/en/actions/creating-actions/creating-a-composite-action
-description: 'Greet someone'
+name: 'Validate Helm Chart'
+description: 'Validates a helm chart using helm lint, and helm template commands. Optionally validates that the only branch merged into main is alpha'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
-outputs:
-  random-number:
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-id }}
+  validate-main-alpha-merge:
+    description: 'When true, the action will fail if the pull request is into the `main` branch and the source branch is not `alpha`'
+    required: false
+    default: true
+outputs: {}
 runs:
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}.
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Setup Helm
+      uses: azure/setup-helm@v1
+      with:
+        version: v3.7.2
+    - name: Lint and Template chart
       shell: bash
-    - id: random-number-generator
-      run: echo "::set-output name=random-id::$(echo $RANDOM)"
+      run: |
+        helm dependency update chart
+        helm lint chart
+        helm template chart
+    - name: Validate branch
+      if: inputs.validate-main-alpha-merge && github.base_ref == 'main' && github.head_ref != 'alpha'
       shell: bash
-    - run: ${{ github.action_path }}/goodbye.sh
-      shell: bash
-
+      run: |
+        echo "Branch ${{ github.head_ref }} is not allowed to be merged to main. Only alpha is allowed to be merged to main."
+        exit 1
