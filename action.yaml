@@ -4,7 +4,7 @@ inputs:
   validate-main-alpha-merge:
     description: 'When true, the action will fail if the pull request is into the `main` branch and the source branch is not `alpha`'
     required: false
-    default: true
+    default: 'true'
   lint-args:
     description: 'Args to pass to the lint command. i.e. `--set x=y`'
     required: false
@@ -30,7 +30,7 @@ runs:
         helm lint chart ${{ inputs.lint-args }}
         helm template chart ${{ inputs.template-args }}
     - name: Validate branch
-      if: inputs.validate-main-alpha-merge && github.base_ref == 'main' && github.head_ref != 'alpha'
+      if: inputs.validate-main-alpha-merge == 'true' && github.base_ref == 'main' && github.head_ref != 'alpha'
       shell: bash
       run: |
         echo "Branch ${{ github.head_ref }} is not allowed to be merged to main. Only alpha is allowed to be merged to main."
