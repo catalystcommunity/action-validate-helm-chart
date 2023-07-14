@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/catalystsquad/action-validate-helm-chart/compare/v1.0.1...v1.0.2) (2023-07-14)
+
+
+### Bug Fixes
+
+* do a string comparison for the alpha config ([#4](https://github.com/catalystsquad/action-validate-helm-chart/issues/4)) ([8b828fa](https://github.com/catalystsquad/action-validate-helm-chart/commit/8b828fae5d3b4ff7d1a76ed54a72b9f570d2569b))
+
 ## [1.0.1](https://github.com/catalystsquad/action-validate-helm-chart/compare/v1.0.0...v1.0.1) (2022-03-06)
 
 
