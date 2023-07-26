@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/catalystsquad/action-validate-helm-chart/compare/v1.0.2...v1.1.0) (2023-07-26)
+
+
+### Features
+
+* make the chart path configurable ([#5](https://github.com/catalystsquad/action-validate-helm-chart/issues/5)) ([8e3748e](https://github.com/catalystsquad/action-validate-helm-chart/commit/8e3748e432ccb3d5b2bfcf24d67c9d84e877fae5))
+
 ## [1.0.2](https://github.com/catalystsquad/action-validate-helm-chart/compare/v1.0.1...v1.0.2) (2023-07-14)
 
 
