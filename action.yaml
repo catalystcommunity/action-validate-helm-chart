@@ -5,6 +5,10 @@ inputs:
     description: 'When true, the action will fail if the pull request is into the `main` branch and the source branch is not `alpha`'
     required: false
     default: 'true'
+  chart-path:
+    description: 'Path to the helm chart. Defaults to "chart"'
+    required: false
+    default: 'chart'
   lint-args:
     description: 'Args to pass to the lint command. i.e. `--set x=y`'
     required: false
@@ -26,9 +30,9 @@ runs:
     - name: Lint and Template chart
       shell: bash
       run: |
-        helm dependency update chart
-        helm lint chart ${{ inputs.lint-args }}
-        helm template chart ${{ inputs.template-args }}
+        helm dependency update ${{ inputs.chart-path }}
+        helm lint ${{ inputs.chart-path }} ${{ inputs.lint-args }}
+        helm template ${{ inputs.chart-path }} ${{ inputs.template-args }}
     - name: Validate branch
       if: inputs.validate-main-alpha-merge == 'true' && github.base_ref == 'main' && github.head_ref != 'alpha'
       shell: bash
