@@ -13,7 +13,7 @@ Validates a helm chart using helm lint, and helm template commands. Optionally v
 <!-- start usage -->
 
 ```yaml
-- uses: catalystsquad/action-validate-helm-chart@undefined
+- uses: catalystcommunity/action-validate-helm-chart@undefined
   with:
     # When true, the action will fail if the pull request is into the `main` branch
     # and the source branch is not `alpha`
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: crazy-max/ghaction-dump-context@v1
-      - uses: catalystsquad/action-validate-helm-chart@v1
+      - uses: catalystcommunity/action-validate-helm-chart@v1
 ```
 
 <!-- end examples -->
